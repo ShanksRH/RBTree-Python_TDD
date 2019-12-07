@@ -10,6 +10,11 @@ class TestRBTree(unittest.TestCase):
         t = rbtree.RBTree()
         t.insert(2)
         self.assertEqual(t.root.key, 2)
+    
+    def test_find_one(self):
+        t = rbtree.RBTree()
+        t.insert(2)
+        self.assertEqual(t.find(2), True)
 
 if __name__ == '__main__':
     unittest.main()
