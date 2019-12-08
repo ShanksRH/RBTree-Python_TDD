@@ -28,7 +28,7 @@ class TestRBTree(unittest.TestCase):
     def test_find_one(self):
         t = rbtree.RBTree()
         t.insert(2)
-        self.assertEqual(t.find(2), True)
+        self.assertTrue(t.find(2))
 
     def test_insert_many(self):
         t = rbtree.RBTree()
@@ -46,6 +46,14 @@ class TestRBTree(unittest.TestCase):
         ct.root.right.right.right = rbtree.Node(8, ct.root.right.right)
         ct.root.right.right.right.right = rbtree.Node(9, ct.root.right.right.right)
         self.assertTrue(tree_compare(t.root, ct.root))
+
+    def test_find_many(self):
+        t = rbtree.RBTree()
+        for i in range(10):
+            t.insert(i)
+        for i in range(10):
+            self.assertTrue(t.find(i))
+
 
 if __name__ == '__main__':
     unittest.main()
