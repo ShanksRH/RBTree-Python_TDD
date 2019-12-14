@@ -1,6 +1,20 @@
 import unittest
 import rbtree
 
+def makect():
+    ct = rbtree.RBTree()
+    ct.root = rbtree.Node(3)
+    ct.root.left = rbtree.Node(1, ct.root)
+    ct.root.right = rbtree.Node(5, ct.root)
+    ct.root.left.left = rbtree.Node(0, ct.root.left)
+    ct.root.left.right = rbtree.Node(2, ct.root.left)
+    ct.root.right.left = rbtree.Node(4, ct.root.right)
+    ct.root.right.right = rbtree.Node(7, ct.root.right)
+    ct.root.right.right.left = rbtree.Node(6, ct.root.right.right)
+    ct.root.right.right.right = rbtree.Node(8, ct.root.right.right)
+    ct.root.right.right.right.right = rbtree.Node(9, ct.root.right.right.right)
+    return ct
+
 def only_keys_comparator(t1, t2):
     if t1.key == t2.key:
         return True
@@ -34,17 +48,7 @@ class TestRBTree(unittest.TestCase):
         t = rbtree.RBTree()
         for i in range(10):
             t.insert(i)
-        ct = rbtree.RBTree()
-        ct.root = rbtree.Node(3)
-        ct.root.left = rbtree.Node(1, ct.root)
-        ct.root.right = rbtree.Node(5, ct.root)
-        ct.root.left.left = rbtree.Node(0, ct.root.left)
-        ct.root.left.right = rbtree.Node(2, ct.root.left)
-        ct.root.right.left = rbtree.Node(4, ct.root.right)
-        ct.root.right.right = rbtree.Node(7, ct.root.right)
-        ct.root.right.right.left = rbtree.Node(6, ct.root.right.right)
-        ct.root.right.right.right = rbtree.Node(8, ct.root.right.right)
-        ct.root.right.right.right.right = rbtree.Node(9, ct.root.right.right.right)
+        ct = makect()
         self.assertTrue(tree_compare(t.root, ct.root))
 
     def test_find_many(self):
@@ -53,6 +57,15 @@ class TestRBTree(unittest.TestCase):
             t.insert(i)
         for i in range(10):
             self.assertTrue(t.find(i))
+
+    def test_delete_leaf(self):
+        t = rbtree.RBTree()
+        for i in range(10):
+            t.insert(i)
+        self.assertTrue(t.delete(9))
+        ct = makect()
+        ct.root.right.right.right.right = rbtree.Node(None, ct.root.right.right.right)
+        self.assertTrue(tree_compare(t.root, ct.root))
 
 
 if __name__ == '__main__':
