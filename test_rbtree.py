@@ -62,6 +62,10 @@ class TestRBTree(unittest.TestCase):
         for i in range(10):
             self.assertTrue(t.find(i))
 
+    def test_delete_none(self):
+        t = rbtree.RBTree()
+        self.assertFalse(t.delete(2))
+
     def test_delete_leaf(self):
         t = rbtree.RBTree()
         for i in range(10):
