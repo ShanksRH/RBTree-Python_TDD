@@ -39,6 +39,10 @@ class TestRBTree(unittest.TestCase):
         t.insert(2)
         self.assertEqual(t.root.key, 2)
     
+    def test_find_none(self):
+        t = rbtree.RBTree()
+        self.assertFalse(t.find(2))
+
     def test_find_one(self):
         t = rbtree.RBTree()
         t.insert(2)
