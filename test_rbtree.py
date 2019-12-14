@@ -61,6 +61,13 @@ class TestRBTree(unittest.TestCase):
             t.insert(i)
         for i in range(10):
             self.assertTrue(t.find(i))
+    
+    def test_find_many2(self):
+        t = rbtree.RBTree()
+        for i in range(10, 0, -1):
+            t.insert(i)
+        for i in range(1, 11):
+            self.assertTrue(t.find(i))
 
     def test_delete_none(self):
         t = rbtree.RBTree()

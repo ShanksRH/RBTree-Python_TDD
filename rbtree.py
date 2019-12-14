@@ -64,11 +64,6 @@ class Node:
                 self.parent.left = other
             else:
                 self.parent.right = other
-    
-    def magic(self, other):
-        if other != None:
-            other.parent = self.parent
-        return self.parent
 
     def rotate_right(self):
         pivot = self.left
