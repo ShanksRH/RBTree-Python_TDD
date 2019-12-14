@@ -57,7 +57,11 @@ class TestRBTree(unittest.TestCase):
 
     def test_find_many(self):
         t = rbtree.RBTree()
-        for i in range(10):
+        for i in range(0, 100, 3):
+            t.insert(i)
+        for i in range(1, 100, 3):
+            t.insert(i)
+        for i in range(2, 100, 3):
             t.insert(i)
         for i in range(10):
             self.assertTrue(t.find(i))
