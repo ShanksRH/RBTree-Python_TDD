@@ -91,6 +91,13 @@ class TestRBTree(unittest.TestCase):
         ct = makect()
         ct.root.right = rbtree.Node(4, ct.root)
         self.assertTrue(tree_compare(t.root, ct.root))
+    
+    def test_delete_many2(self):
+        t = rbtree.RBTree()
+        for i in range(10):
+            t.insert(i)
+        for i in range(0, 6):
+            self.assertTrue(t.delete(i))
 
 
 if __name__ == '__main__':
