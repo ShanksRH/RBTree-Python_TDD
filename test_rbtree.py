@@ -86,6 +86,22 @@ class TestRBTree(unittest.TestCase):
         ct.root.right.right.right.right = rbtree.Node(None, ct.root.right.right.right)
         self.assertTrue(tree_compare(t.root, ct.root))
     
+    def test_delete_root(self):
+        t = rbtree.RBTree()
+        t.insert(1)
+        self.assertTrue(t.delete(1))
+        self.assertEqual(t.root, None)
+    
+    def test_delete_not_exist_small(self):
+        t = rbtree.RBTree()
+        t.insert(1)
+        self.assertFalse(t.delete(-1))
+    
+    def test_delete_not_exist_big(self):
+        t = rbtree.RBTree()
+        t.insert(1)
+        self.assertFalse(t.delete(2))
+    
     def test_delete_many(self):
         t = rbtree.RBTree()
         for i in range(10):

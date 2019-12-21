@@ -23,6 +23,8 @@ class RBTree:
         res = self.root.delete(key)
         while self.root.parent != None:
             self.root = self.root.parent
+        if self.root.key == None:
+            self.root = None
         return res
 
 class Node:
@@ -123,6 +125,8 @@ class Node:
     def delete_case1(self):
         if self.parent != None:
             self.delete_case2()
+        else:
+            return True
     
     def delete_case2(self):
         b = self.bro()
@@ -216,7 +220,8 @@ class Node:
             if child.color == 1:
                 child.color = 0
             else:
-                child.delete_case1()
+                if child.delete_case1():
+                    self.parent = child
     
     def delete(self, key):
         if self.key == key:
