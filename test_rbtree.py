@@ -1,5 +1,6 @@
 import unittest
 import rbtree
+import random
 
 def makect():
     ct = rbtree.RBTree()
@@ -96,6 +97,18 @@ class TestRBTree(unittest.TestCase):
         t = rbtree.RBTree()
         t.insert(1)
         self.assertFalse(t.delete(-1))
+    
+    def test_delete_magic(self):
+        t = rbtree.RBTree()
+        random.seed(0)
+        vals = [0]*100
+        for i in range(len(vals)):
+            k = random.randint(0, 99)
+            vals[k] = 1
+            t.insert(k)
+        for i in range(len(vals)):
+            if vals[i] == 1:
+                self.assertTrue(t.delete(i))
     
     def test_delete_not_exist_big(self):
         t = rbtree.RBTree()

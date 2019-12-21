@@ -107,15 +107,17 @@ class Node:
 
     def insert_case4(self):
         g = self.grandparent()
+        n = self
         if self == self.parent.right and self.parent == g.left:
             self.parent.rotate_left()
-            self.copy(self.left)
+            n = self.left
         elif self == self.parent.left and self.parent == g.right:
             self.parent.rotate_right()
-            self.copy(self.right)
-        self.insert_case5(g)
+            n = self.right
+        n.insert_case5()
 
-    def insert_case5(self, g):
+    def insert_case5(self):
+        g = self.grandparent()
         self.parent.color, g.color = 0, 1
         if self == self.parent.left and self.parent == g.left:
             g.rotate_right()
