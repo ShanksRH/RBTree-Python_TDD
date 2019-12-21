@@ -36,10 +36,6 @@ class Node:
             self.left, self.right = Node(None, self), Node(None, self)
         else:
             self.left, self.right = None, None
-    
-    def copy(self, node):
-        self.left, self.right, self.parent, self.left, self.color = \
-        node.left, node.right, node.parent, node.left, node.color
 
     def grandparent(self):
         if self.parent == None:

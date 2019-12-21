@@ -48,6 +48,16 @@ class TestRBTree(unittest.TestCase):
         t = rbtree.RBTree()
         t.insert(2)
         self.assertTrue(t.find(2))
+    
+    def test_find_none_small(self):
+        t = rbtree.RBTree()
+        t.insert(2)
+        self.assertFalse(t.find(1))
+    
+    def test_find_none_big(self):
+        t = rbtree.RBTree()
+        t.insert(2)
+        self.assertFalse(t.find(3))
 
     def test_insert_many(self):
         t = rbtree.RBTree()
@@ -98,6 +108,11 @@ class TestRBTree(unittest.TestCase):
         t.insert(1)
         self.assertFalse(t.delete(-1))
     
+    def test_delete_not_exist_big(self):
+        t = rbtree.RBTree()
+        t.insert(1)
+        self.assertFalse(t.delete(2))
+    
     def test_delete_magic(self):
         t = rbtree.RBTree()
         random.seed(0)
@@ -110,10 +125,17 @@ class TestRBTree(unittest.TestCase):
             if vals[i] == 1:
                 self.assertTrue(t.delete(i))
     
-    def test_delete_not_exist_big(self):
+    def test_delete_magic2(self):
         t = rbtree.RBTree()
-        t.insert(1)
-        self.assertFalse(t.delete(2))
+        random.seed(0)
+        vals = [0]*100
+        for i in range(len(vals)):
+            k = random.randint(0, 99)
+            vals[k] = 1
+            t.insert(k)
+        for i in range(len(vals) - 1, -1, -1):
+            if vals[i] == 1:
+                self.assertTrue(t.delete(i))
     
     def test_delete_many(self):
         t = rbtree.RBTree()
@@ -131,7 +153,14 @@ class TestRBTree(unittest.TestCase):
             t.insert(i)
         for i in range(0, 6):
             self.assertTrue(t.delete(i))
-
+    
+    def test_delete_many3(self):
+        t = rbtree.RBTree()
+        for i in range(10):
+            t.insert(i)
+        self.assertTrue(t.delete(3))
+        self.assertTrue(t.delete(4))
+    
 
 if __name__ == '__main__':
     unittest.main()
