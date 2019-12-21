@@ -38,14 +38,10 @@ class Node:
             self.left, self.right = None, None
 
     def grandparent(self):
-        if self.parent == None:
-            return None
         return self.parent.parent
     
     def uncle(self):
         g = self.grandparent()
-        if g == None:
-            return None
         if self.parent == g.left:
             return g.right
         return g.left
